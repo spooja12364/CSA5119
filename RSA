@@ -1,0 +1,24 @@
+def modinv(a, m):
+    for x in range(1, m):
+        if (a * x) % m == 1:
+            return x
+
+p, q = 3, 11
+n = p * q          # 33
+phi = (p - 1)*(q - 1)  # 20
+
+e = 3              # choose e coprime with phi
+d = modinv(e, phi) # modular inverse of e mod phi
+
+def encrypt(msg):
+    return [pow(ord(c), e, n) for c in msg]
+
+def decrypt(cipher):
+    return ''.join([chr(pow(c, d, n)) for c in cipher])
+
+message = "hi"
+ciphertext = encrypt(message)
+print("Encrypted:", ciphertext)
+
+plaintext = decrypt(ciphertext)
+print("Decrypted:", plaintext)
