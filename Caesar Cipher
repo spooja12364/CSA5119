@@ -1,0 +1,17 @@
+def encrypt(text, shift):
+    result = ""
+    for char in text:
+        result += chr((ord(char) - 97 + shift) % 26 + 97)
+    return result
+
+def decrypt(text, shift):
+    return encrypt(text, -shift)
+
+msg = "hello"
+s = 3
+
+enc = encrypt(msg, s)
+dec = decrypt(enc, s)
+
+print("Encrypted:", enc)
+print("Decrypted:", dec)
