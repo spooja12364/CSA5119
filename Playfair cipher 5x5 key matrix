@@ -1,0 +1,9 @@
+def gen_matrix(key):
+    key = key.lower().replace("j","i")
+    alpha = "abcdefghiklmnopqrstuvwxyz"
+    seen = set()
+    res = [c for c in key+alpha if c not in seen and not seen.add(c)]
+    return [res[i:i+5] for i in range(0,25,5)]
+
+for row in gen_matrix("keyword"):
+    print(row)
