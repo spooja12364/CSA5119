@@ -1,0 +1,28 @@
+def encrypt(text):
+    key = "phqgiumeaylnofdxjkrcvstzwb"
+    alpha = "abcdefghijklmnopqrstuvwxyz"
+    result = ""
+    for char in text:
+        if char in alpha:
+            result += key[alpha.index(char)]
+        else:
+            result += char
+    return result
+
+def decrypt(text):
+    key = "phqgiumeaylnofdxjkrcvstzwb"
+    alpha = "abcdefghijklmnopqrstuvwxyz"
+    result = ""
+    for char in text:
+        if char in key:
+            result += alpha[key.index(char)]
+        else:
+            result += char
+    return result
+
+msg = "hello"
+enc = encrypt(msg)
+dec = decrypt(enc)
+
+print("Encrypted:", enc)
+print("Decrypted:", dec)
