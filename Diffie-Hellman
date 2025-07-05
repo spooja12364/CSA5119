@@ -1,0 +1,17 @@
+def diffie_hellman(p, g, a, b):
+    A = pow(g, a, p)  # Alice's public value
+    B = pow(g, b, p)  # Bob's public value
+
+    s1 = pow(B, a, p) # Alice's shared secret
+    s2 = pow(A, b, p) # Bob's shared secret
+
+    return s1, s2
+
+p = 23      # a prime number
+g = 5       # primitive root modulo p
+a = 6       # Alice's private key (secret)
+b = 15      # Bob's private key (secret)
+
+shared_secret_alice, shared_secret_bob = diffie_hellman(p, g, a, b)
+print("Alice's shared secret:", shared_secret_alice)
+print("Bob's shared secret  :", shared_secret_bob)
