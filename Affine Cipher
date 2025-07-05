@@ -1,0 +1,19 @@
+def mod_inv(a, m=26):
+    for i in range(m):
+        if (a * i) % m == 1:
+            return i
+
+def encrypt(text, a, b):
+    return ''.join(chr(((a*(ord(c)-97)+b)%26)+97) for c in text)
+
+def decrypt(cipher, a, b):
+    a_inv = mod_inv(a)
+    return ''.join(chr(((a_inv*(ord(c)-97 - b))%26)+97) for c in cipher)
+
+a, b = 5, 8
+msg = "hello"
+enc = encrypt(msg, a, b)
+dec = decrypt(enc, a, b)
+
+print(enc)
+print(dec)
