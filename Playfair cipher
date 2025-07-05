@@ -1,0 +1,21 @@
+def playfair_encrypt(msg, key):
+    msg = msg.replace("j", "i").replace(" ", "")
+    msg += 'x' * (len(msg) % 2)
+    key = "".join(dict.fromkeys(key + "abcdefghiklmnopqrstuvwxyz"))
+    m = [key[i:i+5] for i in range(0, 25, 5)]
+    def pos(c): return [(i, row.index(c)) for i, row in enumerate(m) if c in row][0]
+    res = ""
+    for i in range(0, len(msg), 2):
+        a, b = msg[i], msg[i+1]
+        if a == b: b = 'x'
+        r1, c1 = pos(a)
+        r2, c2 = pos(b)
+        if r1 == r2:
+            res += m[r1][(c1+1)%5] + m[r2][(c2+1)%5]
+        elif c1 == c2:
+            res += m[(r1+1)%5][c1] + m[(r2+1)%5][c2]
+        else:
+            res += m[r1][c2] + m[r2][c1]
+    return res
+
+print(playfair_encrypt("hello", "keyword"))
