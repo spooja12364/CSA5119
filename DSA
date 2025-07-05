@@ -1,0 +1,11 @@
+from cryptography.hazmat.primitives.asymmetric import dsa
+from cryptography.hazmat.primitives import hashes
+
+msg = b"hello"
+priv = dsa.generate_private_key(key_size=1024)
+pub = priv.public_key()
+
+sig = priv.sign(msg, hashes.SHA256())
+pub.verify(sig, msg, hashes.SHA256())
+
+print("Signature valid!")
