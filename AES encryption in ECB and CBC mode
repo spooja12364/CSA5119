@@ -1,0 +1,16 @@
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad, unpad
+from Crypto.Random import get_random_bytes
+
+key = b'0123456789abcdef'
+data = b'hello world!!!'  # 14 bytes
+iv = get_random_bytes(16)
+
+ecb = AES.new(key, AES.MODE_ECB)
+cbc = AES.new(key, AES.MODE_CBC, iv)
+
+ct_ecb = ecb.encrypt(pad(data, 16))
+ct_cbc = cbc.encrypt(pad(data, 16))
+
+print("ECB:", ct_ecb.hex())
+print("CBC:", ct_cbc.hex())
