@@ -1,0 +1,5 @@
+import hashlib
+
+data = b"hello world"
+hash_obj = hashlib.sha3_256(data)
+print(hash_obj.hexdigest())
