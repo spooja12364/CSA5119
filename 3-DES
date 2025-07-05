@@ -1,0 +1,12 @@
+from Crypto.Cipher import DES3
+from Crypto.Random import get_random_bytes
+
+key = DES3.adjust_key_parity(get_random_bytes(24))  # 24 bytes key for 3DES
+cipher = DES3.new(key, DES3.MODE_ECB)
+
+plaintext = b'12345678'  # Must be 8 bytes for DES3
+ciphertext = cipher.encrypt(plaintext)
+print("Encrypted:", ciphertext)
+
+decrypted = cipher.decrypt(ciphertext)
+print("Decrypted:", decrypted)
