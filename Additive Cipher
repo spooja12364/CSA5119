@@ -1,0 +1,22 @@
+def decrypt(text, key):
+    result = ""
+    for c in text:
+        if c.isalpha():
+            result += chr((ord(c) - 97 - key) % 26 + 97)
+        else:
+            result += c
+    return result
+
+def freq_attack(cipher):
+    freq = [0]*26
+    for c in cipher:
+        if c.isalpha():
+            freq[ord(c)-97] += 1
+    most_freq = freq.index(max(freq))
+    key = (most_freq - (ord('e') - 97)) % 26
+    return key
+
+cipher = "khoor zruog"
+key = freq_attack(cipher)
+print("Guessed key:", key)
+print("Decrypted:", decrypt(cipher, key))
