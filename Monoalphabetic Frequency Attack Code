@@ -1,0 +1,22 @@
+from collections import Counter
+
+def freq_attack(cipher):
+    cipher = cipher.lower()
+    freq_order = 'etaoinshrdlcumwfgypbvkjxqz'
+    letters = [c for c in cipher if c.isalpha()]
+    counts = Counter(letters)
+    most_common = [x[0] for x in counts.most_common()]
+    mapping = {}
+    for i, c in enumerate(most_common):
+        mapping[c] = freq_order[i]
+    result = ""
+    for ch in cipher:
+        if ch.isalpha():
+            result += mapping.get(ch, '?')
+        else:
+            result += ch
+    return result
+
+ciphertext = "phhw ph diwhu wklv sodb"
+
+print(freq_attack(ciphertext))
