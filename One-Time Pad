@@ -1,0 +1,29 @@
+import random
+import string
+
+def generate_key(length):
+    return ''.join(random.choice(string.ascii_lowercase) for _ in range(length))
+
+def encrypt(text, key):
+    result = ""
+    for t, k in zip(text, key):
+        val = (ord(t) - 97) ^ (ord(k) - 97)  # XOR
+        result += chr(val + 97)
+    return result
+
+def decrypt(cipher, key):
+    result = ""
+    for c, k in zip(cipher, key):
+        val = (ord(c) - 97) ^ (ord(k) - 97)
+        result += chr(val + 97)
+    return result
+
+msg = "hello"
+key = generate_key(len(msg))
+cipher = encrypt(msg, key)
+plain = decrypt(cipher, key)
+
+print("Message:", msg)
+print("Key    :", key)
+print("Cipher :", cipher)
+print("Plain  :", plain)
