@@ -1,0 +1,14 @@
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad, unpad
+
+key = b'1234567890abcdef'  # 16 bytes key for AES-128
+data = b'Hello ECB Mode!'  # Data to encrypt
+
+cipher = AES.new(key, AES.MODE_ECB)
+ciphertext = cipher.encrypt(pad(data, 16))
+
+decipher = AES.new(key, AES.MODE_ECB)
+plaintext = unpad(decipher.decrypt(ciphertext), 16)
+
+print("Ciphertext:", ciphertext.hex())
+print("Plaintext:", plaintext.decode())
